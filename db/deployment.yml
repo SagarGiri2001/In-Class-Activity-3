@@ -1,0 +1,31 @@
+# Deployment file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+spec:
+  selector:
+    matchLabels:
+      id: C0927408
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        id: C0927408
+        app: db
+        env: dev
+    spec:
+      containers:
+      - name: wordpress-db
+        image: mariadb:10.6.4-focal
+        ports:
+        - containerPort: 3306
+        envFrom:
+          - configMapRef:
+              name: db-configmap
+              optional: false
+          - secretRef:
+              name: db-secret
+              optional: false
+
+

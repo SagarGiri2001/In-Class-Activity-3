@@ -1,0 +1,37 @@
+# Deployment file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+spec:
+  selector:
+    matchLabels:
+      id: C0927408
+      app: wp-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        id: C0927408
+        app: wp-app
+        env: dev
+    spec:
+      containers:
+      - name: wordpress
+        image: wordpress:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: wordpress-configmap
+              optional: false
+          - secretRef:
+              name: wordpress-secret
+              optional: false
+
+

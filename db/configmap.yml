@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-configmap
+  labels:
+    app: db
+    env: dev
+data:
+  MYSQL_DATABASE: "wordpress"
+  MYSQL_USER: "sagar"
+  # APP_ENV: "dev"
+  # APP_NAME: "webserver"
+  # APP_TYPE: "proxy"
