@@ -5,14 +5,14 @@ db:
     env: dev
     stack: wordpress
   image:
-    repository: wordpress:latest
-    tag: v2
+    repository: mariadb
+    tag: 10.6.4-focal
     pullPolicy: Always
   replicas: 1
   configmap:
     ## KEY: "value"
-    MYSQL_DATABASE: 0927408
-    MYSQL_USER: sagar
+    MYSQL_DATABASE: wordpress
+    MYSQL_USER: wordpress
     APP_ENV: dev
   containerPorts:
       mysql: 3306
