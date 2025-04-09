@@ -1,0 +1,19 @@
+---
+# Source: wordpress-db/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: wp-database
+  labels:
+    app: db
+    env: dev
+    stack: wordpress
+spec:
+  ports:
+  - port: 3306            # the port on which the service is listening
+    protocol: TCP
+    targetPort: 3306      # the port exposed by Pod (we defined in the deployment as part of `containerPort)
+  selector:
+    app: db
+    env: dev
+    stack: wordpress       # Pod label that service is using to select Pods

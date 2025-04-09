@@ -1,0 +1,44 @@
+---
+# Source: wordpress-db/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wp-database
+  labels:
+    app: db
+    env: dev
+    stack: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: db
+      env: dev
+      stack: wordpress
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db
+        env: dev
+        stack: wordpress
+    spec:
+      containers:
+      - name: wp-database
+        image: msalim22/wpdb:v2
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: wp-database-configmap
+              optional: false
+          - secretRef:
+              name: wp-database-secret
+              optional: false
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: wp-database-volume
+          mountPath: /var/lib/mysql       # Path inside container
+      volumes:
+      - name: wp-database-volume
+        hostPath:
+          path: /var/lib/wp-data     # Path in host machine

@@ -1,0 +1,19 @@
+wp:
+  name: wpapp
+  labels:
+    app: wp
+    env: stage
+    stack: wordpress
+  image:
+    repository: msalim22/wp
+    tag: v2
+    pullPolicy: Always
+  replicas: 3
+  configmap:
+    ## KEY: "value"
+    APP_ENV: "stage"
+    WORDPRESS_DB_HOST: "wp-database.wpdb.svc.cluster.local"
+    WORDPRESS_DB_NAME: "wordpress"
+    WORDPRESS_DB_USER: "wordpress"
+  containerPorts:
+      http: 80

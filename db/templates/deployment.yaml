@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.db.name }}
+  labels:
+{{- toYaml .Values.db.labels | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+{{- toYaml .Values.db.labels | nindent 6 }}
+  replicas: {{ .Values.db.replicas }}
+  template:
+    metadata:
+      labels:
+{{- toYaml .Values.db.labels | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Values.db.name }}
+        image: {{ .Values.db.image.repository }}:{{ .Values.db.image.tag }}
+        imagePullPolicy: {{ .Values.db.image.pullPolicy }}
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.db.name }}-configmap
+              optional: false
+          - secretRef:
+              name: {{ .Values.db.name }}-secret
+              optional: false
+        ports:
+        - containerPort: {{ .Values.db.containerPorts.mysql }}
+        volumeMounts:
+        - name: {{ .Values.db.name }}-volume
+          mountPath: /var/lib/mysql       # Path inside container
+      volumes:
+      - name: {{ .Values.db.name }}-volume
+        hostPath:
+          path: /var/lib/wp-data     # Path in host machine

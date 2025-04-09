@@ -1,0 +1,29 @@
+wp:
+  name: wp-app
+  labels:
+    app: wp-app
+    env: dev
+    stack: wordpress
+  image:
+    repository: msalim22/wp
+    tag: v2
+    pullPolicy: Always
+  replicas: 5
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+  resources:
+    requests:
+      cpu: "150m"
+      memory: "128Mi"
+    limits:
+      cpu: "250m"
+      memory: "256Mi"
+  configmap:
+    ## KEY: "value"
+    WORDPRESS_DB_HOST: "wp-database.wpdb.svc.cluster.local:3306"
+    WORDPRESS_DB_USER: wordpress
+    WORDPRESS_DB_NAME: wordpress
+    APP_ENV: dev
+  containerPorts:
+      http: 80

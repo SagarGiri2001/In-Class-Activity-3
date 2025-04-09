@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.db.name }}
+  labels:
+{{- toYaml .Values.db.labels | nindent 4 }}
+spec:
+  ports:
+  - port: 3306            # the port on which the service is listening
+    protocol: TCP
+    targetPort: {{ .Values.db.containerPorts.mysql }}      # the port exposed by Pod (we defined in the deployment as part of `containerPort)
+  selector:
+{{- toYaml .Values.db.labels | nindent 4 }}       # Pod label that service is using to select Pods

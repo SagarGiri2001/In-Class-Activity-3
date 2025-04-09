@@ -1,0 +1,14 @@
+---
+# Source: wordpress-db/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wp-database-configmap
+  labels:
+    app: db
+    env: dev
+    stack: wordpress
+data:
+  APP_ENV: "dev"
+  MYSQL_DATABASE: "wordpress"
+  MYSQL_USER: "wordpress"

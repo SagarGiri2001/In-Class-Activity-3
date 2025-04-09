@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.wp.name }}-configmap
+  labels:
+{{- toYaml .Values.wp.labels | nindent 4 }}
+data:
+{{- range $k, $v := .Values.wp.configmap }}
+  {{ $k }}: {{ $v | quote }}
+{{- end }}

@@ -6,7 +6,7 @@ metadata:
     app: db
     env: dev
 data:
-  MYSQL_DATABASE: "wordpress"
+  MYSQL_DATABASE: "0927408"
   MYSQL_USER: "sagar"
   # APP_ENV: "dev"
   # APP_NAME: "webserver"

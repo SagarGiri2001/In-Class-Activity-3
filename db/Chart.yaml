@@ -1,0 +1,10 @@
+apiVersion: v1
+appVersion: 1.0.0
+version: 1.0.0
+name: wordpress-db
+description: wordpress database for wp stack
+keywords:
+  - wordpress
+  - mariadb
+maintainers:
+  - name: Mohammad Salim
