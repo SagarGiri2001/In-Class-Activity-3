@@ -6,6 +6,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: Nodeport
+  type: NodePort
   port: 80
+  nodePort: 30007
 
