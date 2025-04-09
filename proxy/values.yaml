@@ -6,6 +6,6 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: ClusterIP
+  type: Nodeport
   port: 80
 
