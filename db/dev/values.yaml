@@ -11,8 +11,8 @@ db:
   replicas: 1
   configmap:
     ## KEY: "value"
-    MYSQL_DATABASE: wordpress
-    MYSQL_USER: wordpress
+    MYSQL_DATABASE: 0927408
+    MYSQL_USER: sagar
     APP_ENV: dev
   containerPorts:
       mysql: 3306
